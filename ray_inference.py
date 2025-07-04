@@ -4,7 +4,7 @@ import time
 #remote task for inference
 @ray.remote
 def infer(x):
-    """Mimic a time-consuming operation (model inference latency)"""
+    """Ray remote task definition. It mimics a time-consuming operation (model inference latency)"""
     time.sleep(0.1) 
     return x * x
 
@@ -24,7 +24,7 @@ def serial_inference(inputs):
 
 
 def parallel_inference(inputs):
-    """Parallel inference using Ray remote tasks."""
+    """Run parallel inference experiment using Ray remote tasks for each input."""
     ray.init(ignore_reinit_error=True)
     start = time.time()
     #lauunch tasks, running as many as possible in parallel, based on number of cores available
