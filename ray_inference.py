@@ -22,12 +22,16 @@ def serial_inference(inputs):
     print(f"Serial inference on {len(inputs)} samples took {duration:.2f}s")
     return results, duration
 
+
 def parallel_inference(inputs):
-    """Parallel via Ray remote tasks."""
+    """Parallel inference using Ray remote tasks."""
     ray.init(ignore_reinit_error=True)
     start = time.time()
+    #lauunch tasks, running as many as possible in parallel, based on number of cores available
     futures = [infer.remote(x) for x in inputs]
+    #wait for all tasks to complete and collect results``
     results = ray.get(futures)
+    #get duration
     duration = time.time() - start
     print(f"Parallel inference on {len(inputs)} samples took {duration:.2f}s")
     ray.shutdown()
