@@ -25,7 +25,7 @@ def serial_inference(inputs):
 
 def parallel_inference(inputs):
     """Run parallel inference experiment using Ray remote tasks for each input."""
-    ray.init(ignore_reinit_error=True)
+    ray.init(ignore_reinit_error=True) #num_cpus=4 will limit the number of parallel tasks to 4``
     start = time.time()
     #lauunch tasks, running as many as possible in parallel, based on number of cores available
     futures = [infer.remote(x) for x in inputs]
