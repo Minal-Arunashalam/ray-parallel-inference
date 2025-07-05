@@ -38,6 +38,7 @@ def parallel_inference(inputs):
     return results, duration
 
 if __name__ == "__main__":
-    inputs = list(range(20))
-    serial_inference(inputs)
-    parallel_inference(inputs)
+    for _ in range(3):
+        inputs = list(range(20))
+        serial_inference(inputs)
+        parallel_inference(inputs)
